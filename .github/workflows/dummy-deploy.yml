@@ -1,0 +1,25 @@
+# .github/workflows/dummy-deploy.yml
+name: Dummy Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_env:
+        description: 'Environment to deploy to'
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # Använder det valda environmentet från inputs
+    environment: ${{ inputs.target_env }}
+
+    steps:
+      - name: Print environment
+        run: echo "deploy to ${{ github.environment }}"
